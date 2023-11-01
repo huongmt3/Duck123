@@ -15,9 +15,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-almost_router.use(bodyParser.urlencoded({
+/*almost_router.use(bodyParser.urlencoded({
     extended: false
-}));
+}));*/
 
 /*==========================================
  |                  INDEX                   |

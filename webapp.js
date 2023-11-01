@@ -39,21 +39,19 @@ app.get("/:universalURL", (req, res) => {
 
  /*==================================
  |        FIX CANNOT GET /          |
- ===================================
+ ===================================*/
 hbs.registerPartials(__dirname + '/views/partials')
 
-const loadingRoute = require('./loading');
-const almostRoute = require('./almost');
+/*const almostRoute = require('./almost');
 const finalRoute = require('./final');
 
-app.use('/loading', loadingRoute);
 app.use('/almost', almostRoute);
-app.use('/final', finalRoute);
+app.use('/final', finalRoute);*/
 
  /*===========================================
  |                  PORT                     |
  ============================================*/
  //app.use('/', router);
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT);
 console.debug('Web Server is listening at port' + PORT);
