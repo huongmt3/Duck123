@@ -1,0 +1,17 @@
+{
+  "name": "duck123",
+  "version": "1.0.0",
+  "description": "testing",
+  "main": "webapp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "huongmt3 <huongmtgcd201620@fpt.edu.vn>",
+  "license": "MIT",
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
+    "handlebars": "^4.7.8",
+    "hbs": "^4.2.0",
+    "html": "^1.0.0"
+  }
+}
