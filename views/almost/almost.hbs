@@ -4,6 +4,199 @@
   <meta charset="UTF-8">
   <title>CodePen - CSS Walking Duck Animation 🦆</title>
   <link rel="stylesheet" href="./style.css">
+
+  
+<div id="container">
+  <button class="face-button">
+    <a href="/final/index" class="face-container"></a>
+    <span class="face-container">
+      <span class="eye left"></span>
+      <span class="eye right"></span>
+      <span class="mouth"></span>
+    </span>
+    </a>
+  </button>
+</div>
+
+<!--button class="mute mute--active">
+  <svg class="mute__icon" viewBox="0 0 24 24">
+    <path fill="#ffffff" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"></path>
+  </svg>
+</button-->
+<!-- partial -->
+  <!--script  type="text/javascript">
+  const quack = new Audio(
+'https://freesound.org/data/previews/418/418509_5632532-lq.mp3');
+
+const duck = document.querySelector('.duck');
+const mute = document.querySelector('.mute');
+const play = () => {
+  quack.
+  play().
+  then(() => {
+    const dur = Math.floor(Math.random() * 5000);
+    duck.style.setProperty('--wing', dur);
+    if (quack.muted)
+    duck.style.setProperty('--wing', 0);
+    setTimeout(play, dur);
+  }).
+  catch(e => {
+    console.warn('Could not get quacking yet as no interaction 🦆 😭');
+  });
+};
+play();
+quack.muted = true;
+mute.addEventListener('click', () => {
+  quack.muted = !quack.muted;
+  if (quack.muted) {
+    mute.classList.add('mute--active');
+  } else {
+    mute.classList.remove('mute--active');
+    play();
+  }
+});
+</script-->
+<style>
+  * {
+	 box-sizing: border-box;
+}
+ *::before, *::after {
+	 box-sizing: border-box;
+}
+ body {
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 margin: 0;
+	 min-height: 100vh;
+	 background: #fbf6e6;
+}
+ #container {
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 width: 6.25rem;
+	 height: 6.25rem;
+}
+ button {
+	 position: relative;
+   left: 450px;
+   bottom: 200px;
+	 display: inline-block;
+	 cursor: pointer;
+	 outline: none;
+	 border: 0;
+	 vertical-align: middle;
+}
+ button.face-button {
+	 width: 6.25rem;
+	 height: 6.25rem;
+	 border-radius: 50%;
+	 background: #fdda5f;
+	 box-shadow: inset 2px -4px 18px #fd9744;
+}
+ .face-container {
+	 position: relative;
+	 display: block;
+	 width: 40px;
+	 height: 20px;
+	 margin: auto;
+}
+ .eye {
+	 position: absolute;
+	 height: 0.5rem;
+	 width: 0.5rem;
+	 background: #2a2927;
+	 border-radius: 50%;
+	 animation: eyeBlink 3200ms linear infinite;
+}
+ .eye.left {
+	 left: 0;
+}
+ .eye.right {
+	 left: 2rem;
+}
+ .mouth {
+	 position: absolute;
+	 top: 1.125rem;
+	 left: 0.8rem;
+	 width: 1rem;
+	 height: 0.125rem;
+	 background: #2a2927;
+	 border-radius: 0;
+}
+ .eye, .mouth {
+	 box-shadow: inset 1px 2px 4px #121110;
+}
+ .face-button:hover .mouth, .face-button:active .mouth {
+	 left: 1rem;
+	 width: 0.5rem;
+	 height: 0.4rem;
+	 border-radius: 1rem 1rem 0.125rem 0.125rem;
+}
+ .face-button:hover .eye, .face-button:active .eye {
+	 height: 0.375rem;
+	 width: 0.375rem;
+	 box-shadow: 0 0 0 0.25rem #fff;
+}
+ @keyframes eyeBlink {
+	 0%, 30%, 36%, 100% {
+		 transform: scale(1);
+	}
+	 32%, 34% {
+		 transform: scale(1, 0);
+	}
+}
+</style>
+<script type="text/javascript">
+const faceButton = document.querySelector('.face-button');
+const faceContainer = document.querySelector('.face-container');
+const containerCoords = document.querySelector('#container');
+const mouseCoords = containerCoords.getBoundingClientRect();
+
+faceButton.addEventListener('mousemove', function(e) {
+  const mouseX = e.pageX - containerCoords.offsetLeft;
+  const mouseY = e.pageY - containerCoords.offsetTop;
+  
+  TweenMax.to(faceButton, 0.3, {
+     x: (mouseX - mouseCoords.width / 2) / mouseCoords.width * 50,
+     y: (mouseY - mouseCoords.height / 2) / mouseCoords.width * 50,
+     ease: Power4.easeOut
+   })
+});
+
+faceButton.addEventListener('mousemove', function(e) {
+  const mouseX = e.pageX - containerCoords.offsetLeft;
+  const mouseY = e.pageY - containerCoords.offsetTop;
+  
+  TweenMax.to(faceContainer, 0.3, {
+     x: (mouseX - mouseCoords.width / 2) / mouseCoords.width * 25,
+     y: (mouseY - mouseCoords.height / 2) / mouseCoords.width * 25,
+     ease: Power4.easeOut
+   })
+});
+
+faceButton.addEventListener('mouseenter', function(e) {
+  TweenMax.to(faceButton, 0.3, {
+    scale: 0.975
+  })
+});
+
+faceButton.addEventListener('mouseleave', function(e) {
+  TweenMax.to(faceButton, 0.3, {
+    x: 0,
+    y: 0,
+    scale: 1
+  })
+  
+  TweenMax.to(faceContainer, 0.3, {
+    x: 0,
+    y: 0,
+    scale: 1
+  })
+});
+</script>
+
 <style>
     :root {
   --color-yellow: #ffed02;
