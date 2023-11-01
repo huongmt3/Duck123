@@ -14,15 +14,15 @@ var {
 } = require('@handlebars/allow-prototype-access');
 hbs.registerPartials(__dirname + '')
 
-const duck = require('./index.hbs');
+const duck = require('./views/index.hbs');
 
 app.use('/duck', duck);
 
 app.get('/', async (req, res) => {
-    const template = handlebars.compile(fs.readFileSync('./index.hbs', 'utf-8'));
+    const template = handlebars.compile(fs.readFileSync('./views/index.hbs', 'utf-8'));
     console.log(duck);
     const result = template({
-        duck : './index.hbs'
+        duck : './views/index.hbs'
     }, {
         allowProtoMethodsByDefault: false,
         allowProtoPropertiesByDefault: false
