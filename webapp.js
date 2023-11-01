@@ -37,6 +37,19 @@ app.get("/:universalURL", (req, res) => {
     res.send("404 URL NOT FOUND");
  });
 
+ /*==================================
+ |        FIX CANNOT GET /          |
+ ===================================
+hbs.registerPartials(__dirname + '/views/partials')
+
+const loadingRoute = require('./loading');
+const almostRoute = require('./almost');
+const finalRoute = require('./final');
+
+app.use('/loading', loadingRoute);
+app.use('/almost', almostRoute);
+app.use('/final', finalRoute);
+
  /*===========================================
  |                  PORT                     |
  ============================================*/

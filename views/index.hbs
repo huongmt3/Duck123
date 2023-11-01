@@ -2,233 +2,222 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Ko hề nịnh 🦆</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel="stylesheet" href="./style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <title>Duck loader 🦆</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./style.css">
+  <a href="./loading/loading1.css" class="btn-liquid">
+		<span class="inner">Continue</span>
+</a>
   <style>
-    body {
-  background: #1D9FD1;
-  height: 100vh;
-  display: flex;
+    *,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+body {
+	display: flex;
+	height: 100vh;
+
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-liquid {
+	display: inline-block;
+	position: relative;
+	width: 100px;
+	height: 50px;
+
+	border-radius: 27px;
+
+	color: #fff;
+	font: 700 14px/60px "Droid Sans", sans-serif;
+	letter-spacing: 0.05em;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+.btn-liquid .inner {
+	position: relative;
+
+	z-index: 2;
+}
+
+.btn-liquid canvas {
+	position: absolute;
+	top: -50px;
+	right: -50px;
+	bottom: -50px;
+	left: -50px;
+
+	z-index: 1;
+}
+body {
   align-items: center;
+  background-color: #C17C74;
+  display: flex;
   justify-content: center;
+  min-height: 100vh;
 }
-
-.water-level {
-  display: block;
-  position: absolute;
-  top: 80%;
-  bottom: -45%;
-  left: -10%;
-  right: -10%;
-  background: #1D9FD1;
-  z-index: 10;
-  opacity: 0.5;
-  animation: infinite bobbing 6000ms ease;
-}
-.water-level:after {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: 75%;
-  left: -30%;
-  right: -30%;
-  height: 200%;
-  border-style: solid;
-  border-color: #1D9FD1;
-  border-width: 0 0 5vw 0;
+.duck-loader {
+  border: 10px solid #fff;
   border-radius: 100%;
-  box-sizing: content-box;
-}
-
-.duck {
-  width: 30vw;
+  height: 300px;
+  overflow: hidden;
   position: relative;
-  animation: infinite bobbing 4000ms linear;
+  transform-origin: preserve-3d;
+  width: 300px;
 }
-.duck:after {
-  content: "";
-  display: block;
-  padding-top: 100%;
+.duck-loader__rain {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 150px;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
 }
-
-.body {
+.duck-loader__rain .rain__drop {
+  height: 30px;
+  -webkit-animation-delay: calc(var(--d) * 1s);
+          animation-delay: calc(var(--d) * 1s);
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc((var(--y) + 50) * -1px);
+  -webkit-animation-name: drop;
+          animation-name: drop;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-duration: calc(var(--a) * 1s);
+          animation-duration: calc(var(--a) * 1s);
+}
+.duck-loader__rain .rain__drop path {
+  fill: #a1c6cc;
+  opacity: var(--o);
+  transform: scaleY(calc(var(--s) * 1.5));
+}
+@-webkit-keyframes drop {
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+}
+@keyframes drop {
+  75% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px);
+    opacity: 0;
+  }
+}
+.duck-loader-duck {
+  -webkit-clip-path: inset(-100% -100% 25% 0%);
+  -webkit-animation: duck 6s infinite;
+          animation: duck 6s infinite;
+  background: #fff;
+  clip-path: inset(-100% -100% 25% 0%);
+  height: 15%;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  width: 30%;
+}
+.duck-loader-duck__wing {
+  -webkit-animation: flap calc(var(--wing) / 1000 * 1s) infinite;
+          animation: flap calc(var(--wing) / 1000 * 1s) infinite;
+  background: #fff;
+  height: 50%;
+  position: absolute;
+  transform-origin: right center;
+  width: 50%;
+  top: 0;
+  left: 0;
+}
+.duck-loader-duck__head {
+  background: #fff;
+  bottom: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  width: 50%;
+}
+.duck-loader-duck__head:before {
+  background: #000;
+  content: '';
+  height: 25%;
+  left: 50%;
+  position: absolute;
+  top: 25%;
+  width: 25%;
+}
+.duck-loader-duck__head:after {
+  content: '';
+  background: #ffa500;
+  height: 35%;
+  left: 100%;
   position: absolute;
   top: 40%;
-  left: 0;
-  right: 0;
-  height: 60%;
-  background: #feef9e;
-  display: block;
-  border-radius: 100% 100% 90% 90%;
-  box-shadow: inset -2vw -2vw 0 1vw #FCE481;
-  border: 1vw solid #feef9e;
-  box-sizing: border-box;
-  z-index: 1;
+  width: 50%;
 }
-
-.head {
-  position: absolute;
-  z-index: 1;
-  bottom: 70%;
-  left: 16%;
-  right: 16%;
-  height: 110%;
-  background: #feef9e;
-  display: block;
-  border-top-left-radius: 150% 200%;
-  border-top-right-radius: 150% 210%;
-  border-bottom-right-radius: 100%;
-  border-bottom-left-radius: 100% 100%;
-  box-shadow: inset -2vw -1vw 0 0 #FCE481;
-  border: 1vw solid #feef9e;
-  box-sizing: border-box;
-  animation: infinite bobbing 4000ms ease reverse;
-}
-
-.feathers {
-  position: absolute;
-  bottom: 90%;
-  height: 40%;
-  left: 0;
-  right: 0;
-}
-.feathers:after, .feathers:before {
-  position: absolute;
-  left: 40%;
-  bottom: 0;
-  content: "";
-  display: block;
-  width: 30%;
-  height: 100%;
-  background: #feef9e;
-  border-radius: 100% 0;
-  transform-origin: bottom center;
-}
-.feathers:before {
-  transform: rotate(40deg);
-  background: #FCE481;
-}
-.feathers:after {
-  transform: rotate(-10deg);
-}
-
-.bill {
-  position: absolute;
-  top: 65%;
-  height: 20%;
-  left: 18%;
-  right: 18%;
-  background: #FDB813;
-  border-top-left-radius: 150% 200%;
-  border-top-right-radius: 150% 200%;
-  border-bottom-right-radius: 50% 100%;
-  border-bottom-left-radius: 50% 100%;
-}
-.bill:after {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: 0;
-  left: 20%;
-  width: 60%;
-  height: 30%;
-  background: #F8951D;
-  border-top-left-radius: 100% 200%;
-  border-top-right-radius: 100% 200%;
-}
-
-.eyes {
-  position: absolute;
-  top: 60%;
-  left: 25%;
-  right: 25%;
-  animation: infinite blink 6000ms ease;
-}
-
-.eye {
-  position: absolute;
-  bottom: 0;
-  width: 16%;
-  background: #005A79;
+.duck-loader__pond-water {
+  background: #22a7f0;
   border-radius: 100%;
-}
-.eye:after {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
-.eye:first-child {
-  left: 0;
-}
-.eye:last-child {
-  right: 0;
-}
-
-.wings {
+  box-shadow: inset 10px 8px 0 0 #095680;
+  height: 85%;
+  left: 50%;
   position: absolute;
-  bottom: 110%;
-  left: -10%;
-  right: -10%;
+  transform: translate(-30%, -60%);
+  top: 50%;
+  width: 110.5%;
 }
-
-.wing {
+.duck-loader__pond-water:after {
+  background: #095680;
+  border-radius: 100%;
+  content: '';
+  height: 20px;
+  left: -9px;
   position: absolute;
-  top: 0;
-  width: 30%;
-  background: #feef9e;
+  top: 43%;
+  width: 20px;
 }
-.wing:after {
-  content: "";
-  display: block;
-  padding-top: 100%;
+.duck-loader__pond {
+  background: #2eec71;
+  height: 100%;
+  width: 100%;
 }
-.wing:first-child {
-  left: 0;
-  border-radius: 100% 0 0 10%;
-}
-.wing:last-child {
-  right: 0;
-  border-radius: 0 100% 10% 0;
-}
-
-.feet {
+.duck-loader__pond:before,
+.duck-loader__pond:after {
+  content: '';
+  background-color: #22a7f0;
   position: absolute;
-  top: 85%;
-  left: 10%;
-  right: 10%;
-  z-index: 0;
-  transform: translate(0, 0);
+  left: 50%;
+  top: 50%;
 }
-
-.foot {
+.duck-loader__pond:after {
+  -webkit-clip-path: inset(0 50% 0 0);
+  background: #22a7f0;
+  border-radius: 100%;
+  clip-path: inset(0 50% 0 0);
+  height: 65%;
   position: absolute;
-  top: 0;
-  width: 30%;
-  background: #FDB813;
-  border-radius: 100% 100% 20% 20%;
-  transform-origin: top center;
-  transform-style: flat;
-  z-index: 0;
+  transform: translate(-65%, -15%) rotate(15deg);
+  width: 97.5%;
 }
-.foot:after {
-  content: "";
-  display: block;
-  padding-top: 100%;
+.duck-loader__pond:before {
+  border-radius: 100%;
+  box-shadow: inset 10px 10px 0 0 #095680;
+  height: 75%;
+  transform: translate(-70%, -20%);
+  width: 112.5%;
 }
-.foot:first-child {
-  left: 0;
-  animation: infinite paddle-left 4000ms linear;
-  animation-delay: 1000ms;
-  transform-origin: top right;
-}
-.foot:last-child {
-  right: 0;
-  animation: infinite paddle-right 4000ms linear;
-  transform-origin: top left;
-}
-
 .mute {
   background: transparent;
   border: 0;
@@ -238,7 +227,7 @@
   right: 10px;
 }
 .mute--active:after {
-  background: #1D9FD1;
+  background: #C17C74;
   content: '';
   height: 100%;
   left: 50%;
@@ -250,75 +239,316 @@
   height: 44px;
   width: 44px;
 }
-
-@keyframes bobbing {
-  20% {
-    transform: translateY(-5%) rotate(3deg);
+@-webkit-keyframes duck {
+  0%, 85%, 95%, 100% {
+    transform: translate(-50%, 0) rotateY(0);
   }
-  50% {
-    transform: translateY(0) rotate(0);
+  15% {
+    transform: translate(25%, 0) rotateY(0);
   }
-  80% {
-    transform: translateY(-5%) rotate(-3deg);
+  20%, 25% {
+    transform: translate(25%, 0) rotateY(180deg);
   }
-}
-@keyframes ripple {
-  100% {
-    width: 80vw;
-    height: 20vw;
-    opacity: 0;
-    border-width: 0vw;
+  40%, 45% {
+    transform: translate(-50%, 0) rotateY(180deg);
   }
-}
-@keyframes blink {
-  0%, 45%, 55%, 100% {
-    transform: scaleY(1);
+  60% {
+    transform: translate(-125%, 0) rotateY(180deg);
   }
-  50% {
-    transform: scaleY(0);
+  65%, 70% {
+    transform: translate(-125%, 0) rotateY(0deg);
   }
 }
-@keyframes paddle-left {
-  25% {
-    transform: rotateX(-45deg) rotateZ(0deg);
+@keyframes duck {
+  0%, 85%, 95%, 100% {
+    transform: translate(-50%, 0) rotateY(0);
   }
-  75% {
-    transform: rotateX(30deg) rotateZ(-20deg);
+  15% {
+    transform: translate(25%, 0) rotateY(0);
+  }
+  20%, 25% {
+    transform: translate(25%, 0) rotateY(180deg);
+  }
+  40%, 45% {
+    transform: translate(-50%, 0) rotateY(180deg);
+  }
+  60% {
+    transform: translate(-125%, 0) rotateY(180deg);
+  }
+  65%, 70% {
+    transform: translate(-125%, 0) rotateY(0deg);
   }
 }
-@keyframes paddle-right {
-  25% {
-    transform: rotateX(-45deg) rotateZ(0deg);
+@-webkit-keyframes flap {
+  0%, 92%, 100% {
+    transform: rotate(0deg);
   }
-  75% {
-    transform: rotateX(30deg) rotateZ(20deg);
-    z-index: 0;
+  96% {
+    transform: rotate(60deg);
   }
 }
-  </style>
+@keyframes flap {
+  0%, 92%, 100% {
+    transform: rotate(0deg);
+  }
+  96% {
+    transform: rotate(60deg);
+  }
+}
+  </style>  
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<div class="duck">
-  <div class="body">
-    <div class="head">
-      <div class="feathers"></div>
-      <div class="bill"></div>
-      <div class="eyes">
-        <div class="eye"></div>
-        <div class="eye"></div>
-      </div>
-    </div>
-    <div class="wings">
-      <div class="wing"></div>
-      <div class="wing"></div>
-    </div>
+<div class="duck-loader">
+  <div class="duck-loader__pond">
+    <div class="duck-loader__pond-water"></div>
   </div>
-  <div class="feet">
-    <div class="foot"></div>
-    <div class="foot"></div>
+  <div class="duck-loader-duck">
+    <div class="duck-loader-duck__head"></div>
+    <div class="duck-loader-duck__wing"></div>
   </div>
-  <div class="water-level"></div>
+  <div class="duck-loader__rain">
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 71; --y: 275; --o: 0.7641518854113232; --a: 0.9491444352238361; --d: -0.36814018942588955; --s: 0.41595465336213144">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 10; --y: 51; --o: 0.18010117055928743; --a: 0.7685882454898196; --d: -0.9680059712805593; --s: 0.8542790833891623">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 60; --y: 168; --o: 0.4580144277882019; --a: 0.2639354350452563; --d: -0.9958351940389223; --s: 0.13952638238195125">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 18; --y: 166; --o: 0.15014154839678318; --a: 0.7889663139054355; --d: -0.6259437795111524; --s: 0.7892011907277137">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 29; --y: 140; --o: 0.7519103276931944; --a: 0.42794461286016605; --d: 0.4665785639384774; --s: 0.9530306336464802">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 43; --y: 263; --o: 0.456866619990399; --a: 0.9524952350679408; --d: -0.7909515221764747; --s: 0.9172120410269142">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 75; --y: 215; --o: 0.8675700022443174; --a: 0.9660320126911095; --d: 0.7920729035627039; --s: 0.5595345334494666">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 64; --y: 238; --o: 0.6061865043483634; --a: 0.8723338615599061; --d: -0.24732532709488986; --s: 0.19957518125299645">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 97; --y: 58; --o: 0.3290684968165465; --a: 0.61081078375592; --d: -0.3013433655201285; --s: 0.45434158364552046">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 75; --y: 31; --o: 0.6791736431175284; --a: 0.8579154225219592; --d: -0.8605563271290197; --s: 0.6944207231224009">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 33; --y: 254; --o: 0.08078260431287365; --a: 1.2328446163609355; --d: -0.4934743196927567; --s: 0.08085509389064671">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 8; --y: 181; --o: 0.17539341815030762; --a: 1.0000863633536694; --d: 0.4681433057970317; --s: 0.19912258212611555">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 58; --y: 206; --o: 0.760114657059723; --a: 0.615512273758787; --d: 0.268901882168485; --s: 0.27300545298662726">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 47; --y: 97; --o: 0.7991046779264366; --a: 0.30332095352512445; --d: 0.16491802423852908; --s: 0.9269859147985293">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 68; --y: 215; --o: 0.9767084031981379; --a: 0.30083004349607423; --d: -0.6793129760535028; --s: 0.43351749095817893">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 45; --y: 81; --o: 0.5714283749421525; --a: 0.4165189254115358; --d: -0.45587301505854017; --s: 0.5751047116922365">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 3; --y: 19; --o: 0.23744847110567213; --a: 0.7594674447383223; --d: -0.47243595390157234; --s: 0.16478227626801045">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 76; --y: 231; --o: 0.12901331825725282; --a: 0.38403258035286547; --d: -0.3492097109341219; --s: 0.6751760085362548">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 98; --y: 199; --o: 0.5476107425706536; --a: 0.8408218742227787; --d: -0.4067758191035935; --s: 0.05942163783936949">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 2; --y: 278; --o: 0.9496919044301071; --a: 1.1089664426429475; --d: 0.12371102644801679; --s: 0.1448648502792771">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 97; --y: 17; --o: 0.8429716992703455; --a: 0.5108785162423313; --d: -0.33320146764895675; --s: 0.5152494406613659">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 87; --y: 241; --o: 0.9956333432154321; --a: 1.226962302448504; --d: 0.3716258214937671; --s: 0.1001532432434451">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 41; --y: 227; --o: 0.3967112066534857; --a: 0.5399936352965453; --d: -0.8477858930998545; --s: 0.9403088884409692">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 92; --y: 281; --o: 0.7604800313243407; --a: 1.0007359916527083; --d: 0.22133269793371957; --s: 0.9159596814295243">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 65; --y: 139; --o: 0.31776613723292035; --a: 0.9658930975771192; --d: 0.1804731944724831; --s: 0.04038943818089247">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 62; --y: 143; --o: 0.243136155119968; --a: 0.4771801821865489; --d: 0.5733704096142085; --s: 0.9537750517023011">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 99; --y: 205; --o: 0.20966975647741193; --a: 0.5131609261042864; --d: 0.614259414674498; --s: 0.6638745237385582">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 17; --y: 156; --o: 0.44963977966044166; --a: 0.5691989249912537; --d: 0.42331947806756265; --s: 0.20118735176424818">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 58; --y: 234; --o: 0.8273419747365636; --a: 1.2322168272239096; --d: -0.23459785312834702; --s: 0.6225221184284642">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 35; --y: 40; --o: 0.030972764011012233; --a: 0.270246163111427; --d: -0.7562334258666135; --s: 0.7052439072134871">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 13; --y: 220; --o: 0.5479827007383018; --a: 0.35225274147849595; --d: -0.4826813150918823; --s: 0.050413290499913055">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 77; --y: 108; --o: 0.028034879050186534; --a: 1.2212886381198793; --d: -0.049270743292872066; --s: 0.932730607601215">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 49; --y: 1; --o: 0.563474170742402; --a: 0.27767104946161236; --d: -0.69349987798509; --s: 0.7457935357275958">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 40; --y: 186; --o: 0.09160577460729291; --a: 1.0636610211362636; --d: 0.5466260935966822; --s: 0.09842730152249324">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 16; --y: 93; --o: 0.4100970086990916; --a: 0.5594565160925364; --d: -0.393757482649137; --s: 0.7769252975799843">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 13; --y: 222; --o: 0.4060096707677281; --a: 0.25713871217578665; --d: -0.21872091094270285; --s: 0.7132224828359233">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 18; --y: 97; --o: 0.8333659954657229; --a: 1.141066597239837; --d: 0.9759184845077664; --s: 0.4654393716792935">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 5; --y: 101; --o: 0.18710523314543104; --a: 0.6950606147515692; --d: -0.33759950589961907; --s: 0.4137221932457187">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 18; --y: 162; --o: 0.13751465414131725; --a: 0.4904387689996459; --d: 0.394964140110178; --s: 0.5723716158063317">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 20; --y: 94; --o: 0.6982775712327929; --a: 1.1098872712570018; --d: -0.3542515670266244; --s: 0.40331686057572713">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 69; --y: 146; --o: 0.9604556825452644; --a: 1.0665191824046123; --d: -0.5536632260535623; --s: 0.7318553121228617">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 17; --y: 20; --o: 0.22124982098472623; --a: 0.3394544418854195; --d: 0.32163823343146225; --s: 0.6086883713111528">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 91; --y: 190; --o: 0.7568661618602226; --a: 0.958085279063799; --d: 0.7665730925355656; --s: 0.8880592230960962">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 4; --y: 251; --o: 0.5530212301627295; --a: 0.4606975831644007; --d: -0.9946292109774051; --s: 0.354285411503638">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 61; --y: 278; --o: 0.612647524412111; --a: 0.5600664906366668; --d: 0.3289924801027637; --s: 0.6582105522918944">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 82; --y: 179; --o: 0.6809931872008712; --a: 0.9568803923100586; --d: -0.11759175889435802; --s: 0.4095644563740888">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 5; --y: 282; --o: 0.01958679899959037; --a: 1.0597399749014227; --d: -0.6104905646510392; --s: 0.863894598427823">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 9; --y: 197; --o: 0.43621061021270546; --a: 0.7232362918151247; --d: -0.9745199477198176; --s: 0.06710653532573962">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 93; --y: 246; --o: 0.7285897166821267; --a: 1.1022916673532595; --d: 0.9477190020478647; --s: 0.7768187400589857">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 26; --y: 256; --o: 0.9145139986675204; --a: 0.8983261086855647; --d: -0.7608954147436764; --s: 0.01894339906616871">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 65; --y: 45; --o: 0.2701211889635946; --a: 1.1459707855974877; --d: -0.2903893813623717; --s: 0.535743619629923">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 13; --y: 192; --o: 0.5529422823710619; --a: 1.091947195097382; --d: 0.7384146493861268; --s: 0.21093240238070754">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 83; --y: 210; --o: 0.9221603325024474; --a: 1.2122976374835548; --d: 0.042723565582184264; --s: 0.17304293782654678">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 79; --y: 279; --o: 0.4193610297031478; --a: 0.6616147666935299; --d: -0.1365209999391861; --s: 0.6851943324746346">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 18; --y: 2; --o: 0.5433901218472434; --a: 0.7431946952267978; --d: 0.6396062714319495; --s: 0.4059192875695017">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 49; --y: 39; --o: 0.04237632014756354; --a: 1.022488943725723; --d: 0.42185031893197644; --s: 0.9036670436187548">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 36; --y: 211; --o: 0.028554311780087716; --a: 0.9470475920236803; --d: -0.4036674560842557; --s: 0.14831124051658584">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 89; --y: 251; --o: 0.03614571521639176; --a: 0.3942990281491381; --d: 0.7239608625921892; --s: 0.7144626745666938">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 66; --y: 141; --o: 0.3363894848347564; --a: 0.6205777452244539; --d: -0.2356258844203114; --s: 0.5793901287758769">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 37; --y: 235; --o: 0.19233353088711547; --a: 0.5588478700342059; --d: 0.37085457270025257; --s: 0.12161648240498235">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 63; --y: 101; --o: 0.5170790486069725; --a: 0.8093551831211743; --d: 0.20491756622534618; --s: 0.02350784235714154">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 41; --y: 187; --o: 0.6135485614804894; --a: 0.44507694842539025; --d: -0.2914121241110026; --s: 0.1519768599615705">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 93; --y: 22; --o: 0.650331897483531; --a: 0.3871050579698798; --d: -0.9400385592238631; --s: 0.05458571449848737">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 64; --y: 39; --o: 0.4736832365832939; --a: 0.607541324420473; --d: 0.2815471950933315; --s: 0.4580375602525204">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 63; --y: 216; --o: 0.8338854081157774; --a: 0.4056129804596327; --d: 0.09219323972966187; --s: 0.7196692322155824">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 66; --y: 157; --o: 0.25487595034135535; --a: 0.2563107939300817; --d: 0.7148102781388586; --s: 0.0022915426910847803">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 38; --y: 191; --o: 0.12659381466015662; --a: 0.833133350553735; --d: 0.7971432983498796; --s: 0.2320353128714281">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 96; --y: 245; --o: 0.8366916106157072; --a: 0.7595991516300933; --d: 0.44320057052614725; --s: 0.23166906903756224">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 65; --y: 277; --o: 0.6089410558349098; --a: 0.8648689883744758; --d: -0.23864378780263218; --s: 0.29658123475532516">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 66; --y: 216; --o: 0.9082947936944283; --a: 0.38131087357772997; --d: -0.24993856893728505; --s: 0.6930931736446304">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 1; --y: 147; --o: 0.895200087101641; --a: 1.1070951538490053; --d: 0.6988897092684763; --s: 0.8472105092321964">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 26; --y: 136; --o: 0.5064974683496464; --a: 0.5546959321521645; --d: -0.8088696376660431; --s: 0.11657180707748704">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 34; --y: 155; --o: 0.24489520656813735; --a: 0.7383774257477758; --d: 0.8900882474607514; --s: 0.009922928355406091">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 7; --y: 36; --o: 0.1664991559833855; --a: 0.6850434963852057; --d: 0.6302663287351771; --s: 0.32066189399695255">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 26; --y: 156; --o: 0.9107896303771899; --a: 1.057660059090199; --d: 0.8312155730604225; --s: 0.4734564263270047">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 68; --y: 54; --o: 0.8697996581117238; --a: 0.8568147919934117; --d: 0.3619277287525815; --s: 0.1774069184339424">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 42; --y: 44; --o: 0.09864000443503573; --a: 1.1630333469998708; --d: -0.9251143993703197; --s: 0.033803332856120916">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 50; --y: 189; --o: 0.340274628226779; --a: 1.0211820842897172; --d: -0.4169361956244275; --s: 0.3559156455174526">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 18; --y: 218; --o: 0.1871537837464985; --a: 0.9180295758274619; --d: -0.5686085933224918; --s: 0.8247748981522531">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+    <svg class="rain__drop" preserveAspectRatio="xMinYMin" viewBox="0 0 5 50" style="--x: 41; --y: 191; --o: 0.16745816201851915; --a: 0.5179188017837415; --d: 0.07392380316276537; --s: 0.08111522772304047">
+      <path stroke="none" d="M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z"></path>
+    </svg>
+  </div>
 </div>
 <button class="mute mute--active">
   <svg class="mute__icon" viewBox="0 0 24 24">
@@ -327,10 +557,10 @@
 </button>
 <!-- partial -->
   <script  type="text/javascript">
-  const quack = new Audio(
+   const quack = new Audio(
 'https://freesound.org/data/previews/418/418509_5632532-lq.mp3');
 
-const duck = document.querySelector('.duck');
+const duck = document.querySelector('.duck-loader');
 const mute = document.querySelector('.mute');
 const play = () => {
   quack.
